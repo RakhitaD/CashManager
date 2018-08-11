@@ -14,5 +14,25 @@
 
 
 <ion-content padding>
-<button ion-button (click)="setDate()"></button>
+
+      <ion-list>
+
+          <ion-item>
+            <ion-label floating>Budget Start Date</ion-label>
+            <ion-input [(ngModel)]="budgetStartDate" type="text" (click)="setDate()"></ion-input>
+            <ion-avatar item-end  (click)="setDate()">
+                <ion-icon name="calendar"></ion-icon>
+            </ion-avatar>
+          </ion-item>
+        
+          <ion-item>
+            <ion-label floating>Budget End Date</ion-label>
+            <ion-input [(ngModel)]="budgetEndDate" type="text" (click)="setDate()"></ion-input>
+            <ion-avatar item-end  (click)="setDate()">
+                <ion-icon name="calendar"></ion-icon>
+            </ion-avatar>
+          </ion-item>
+        
+        </ion-list>
+
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatePicker } from '../../../node_modules/@ionic-native/date-picker';
+import { SetIncomePage } from '../set-income/set-income';
+import { DateServiceProvider } from '../../providers/date-service/date-service';
 
 /**
  * Generated class for the BudgetCreatePage page.
@@ -19,7 +21,7 @@ export class BudgetCreatePage {
   budgetStartDate:string;
   budgetEndDate:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private datePicker:DatePicker) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private datePicker:DatePicker,private dateService:DateServiceProvider) {
     this.initializeBudgetDates();
   }
 
@@ -30,43 +32,42 @@ export class BudgetCreatePage {
     startDate = new Date(today.getFullYear(),today.getMonth(),1);
     endDate = new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(),today.getMonth(),0).getDate());
 
-    this.budgetStartDate = this.formatDate(startDate);
-    this.budgetEndDate = this.formatDate(endDate);
-    console.log(this.budgetStartDate,this.budgetEndDate);
+    this.budgetStartDate = this.dateService.formatDate(startDate);
+    this.budgetEndDate = this.dateService.formatDate(endDate);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BudgetCreatePage');
+
   }
 
-  setDate() {
+  setStartDate() {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
     }).then(
-      date => console.log('Got date: ', date),
+      date => {
+          this.budgetStartDate = this.dateService.formatDate(date);
+      },
       err => console.log('Error occurred while getting date: ', err)
     );
   }
 
-  formatDate(inputDate:Date):string {
-    let dd = inputDate.getDate();
-    let mm = inputDate.getMonth()+1;
-    let stringDD:string;
-    let stringMO:string;
-    let stringYY:string;
+  setEndDate() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
+    }).then(
+      date => {
+          this.budgetEndDate = this.dateService.formatDate(date);
+      },
+      err => console.log('Error occurred while getting date: ', err)
+    );
+  }
 
-    let yyyy = inputDate.getFullYear();
-    if(dd<10){
-      stringDD='0'+dd as string;
-    } 
-    if(mm<10){
-      stringMO='0'+mm;
-    } 
-    stringYY = dd+'/'+mm+'/'+yyyy;
-
-    return stringYY;
+  onNextClick() {
+    this.navCtrl.push(SetIncomePage);
   }
 
 }

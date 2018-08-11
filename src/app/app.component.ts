@@ -46,4 +46,5 @@ export class MyApp {
   onNewBudget() {
     this.nav.push(BudgetCreatePage);
   }
+  
 }

@@ -5,14 +5,33 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>setIncome</ion-title>
+    <ion-row>
+      <ion-col col-10>
+        <ion-title>Income</ion-title>
+      </ion-col>
+      <ion-col col-2>
+          <ion-buttons end>
+            <button ion-button icon-end >
+            <ion-icon name="add" color="dark" large></ion-icon>
+            </button>
+          </ion-buttons>
+      </ion-col>
+    </ion-row>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-list no-lines>
+    <ion-item *ngFor="let c of categories">
+        <income-category [category]='c'></income-category>
+    </ion-item>
+  </ion-list>
+  <ion-item padding>
+    <button default ion-button item-right   (click)="onAddIncomeCategory()">
+      <ion-icon name="cash"></ion-icon>
+      Add Category
+    </button>
+  </ion-item>
+  <button ion-button full  (click)="onNextClick()">Next</button>
 </ion-content>

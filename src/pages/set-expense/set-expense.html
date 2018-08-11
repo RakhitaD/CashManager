@@ -7,12 +7,33 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>setExpense</ion-title>
-  </ion-navbar>
+      <ion-row>
+        <ion-col col-10>
+          <ion-title>Expense</ion-title>
+        </ion-col>
+        <ion-col col-2>
+            <ion-buttons end>
+              <button ion-button icon-end >
+              <ion-icon name="add" color="dark" large></ion-icon>
+              </button>
+            </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-list no-lines>
+    <ion-item *ngFor="let c of categories">
+        <income-category *ngIf="c" [category]='c'></income-category>
+    </ion-item>
+  </ion-list>
+  <ion-item padding>
+    <button default ion-button item-right (click)="onAddExpenseCategory()">
+      <ion-icon name="cash"></ion-icon>
+      Add Category
+    </button>
+  </ion-item>
+  <button ion-button full (click)="onFinish()">Finish</button>
 </ion-content>

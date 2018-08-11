@@ -1,23 +1,58 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>{{setHeaderText()}}</ion-title>
-    <ion-buttons end>
-        <button ion-button icon-end  (click)="onNewBudget()">
-        <ion-icon name="add" color="dark" large></ion-icon>
-      </button>
-      </ion-buttons>
+    <div>
+      <ion-row>
+        <ion-col col-2>
+          <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col col-8  style="margin-top: 1rem">
+            <ion-title>{{setHeaderText()}}</ion-title>
+        </ion-col>
+        <ion-col col-2>
+          <ion-buttons end>
+            <button ion-button icon-end  (click)="onNewBudget()">
+            <ion-icon name="add" color="dark" large></ion-icon>
+          </button>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+      </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<ion-row>
+  <ion-col>Income</ion-col>
+  <ion-col>Amount</ion-col>
+</ion-row>
+<ion-row>
+    <div class="progress">
+        <span class="percent">70%</span>
+        <div class="bar"></div>
+    </div>
+</ion-row>
+<ion-row>
+    <ion-col>Expense</ion-col>
+    <ion-col>Amount</ion-col>
+  </ion-row>
+  <ion-row>
+      <div class="loader" [style.width]="progressPercent">
+					<p class="percent">{{progressPercent}}%</p>
+				</div>
+  </ion-row>
+  <ion-row>
+      <ion-col>Balance</ion-col>
+      <ion-col>Amount</ion-col>
+    </ion-row>
+    <ion-row>
+        <div class="progress" [attr.backgroundColor]="red">
+            <span class="percent"  [attr.width]="progressPercent">{{progressPercent}}%</span>
+            <div class="bar"></div>
+        </div>
+    </ion-row>
 </ion-content>
+<ion-footer>
+    <button ion-button full  >Reports</button>
+</ion-footer>

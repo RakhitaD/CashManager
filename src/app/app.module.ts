@@ -12,6 +12,11 @@ import { SetExpensePage } from '../pages/set-expense/set-expense';
 import { SetIncomePage } from '../pages/set-income/set-income';
 import { BudgetCreatePage } from '../pages/budget-create/budget-create';
 import { DatePicker } from "@ionic-native/date-picker";
+import { FormsModule } from '../../node_modules/@angular/forms';
+import { DateServiceProvider } from '../providers/date-service/date-service';
+import { HttpClientModule } from '../../node_modules/@angular/common/http';
+import { IncomeCategoryComponent } from '../components/income-category/income-category';
+import { ProgressBarModule } from "angular-progress-bar";
 
 @NgModule({
   declarations: [
@@ -20,10 +25,14 @@ import { DatePicker } from "@ionic-native/date-picker";
     ListPage,
     SetExpensePage,
     SetIncomePage,
-    BudgetCreatePage
+    BudgetCreatePage,
+    IncomeCategoryComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    ProgressBarModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -33,13 +42,15 @@ import { DatePicker } from "@ionic-native/date-picker";
     ListPage,
     SetExpensePage,
     SetIncomePage,
-    BudgetCreatePage
+    BudgetCreatePage,
+    IncomeCategoryComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     DatePicker,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DateServiceProvider
   ]
 })
 export class AppModule {}

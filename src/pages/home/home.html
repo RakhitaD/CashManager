@@ -23,36 +23,58 @@
 </ion-header>
 
 <ion-content padding>
-<ion-row>
-  <ion-col>Income</ion-col>
-  <ion-col>Amount</ion-col>
-</ion-row>
-<ion-row>
-    <div class="progress">
-        <span class="percent">70%</span>
-        <div class="bar"></div>
-    </div>
-</ion-row>
-<ion-row>
-    <ion-col>Expense</ion-col>
-    <ion-col>Amount</ion-col>
-  </ion-row>
-  <ion-row>
-      <div class="loader" [style.width]="progressPercent">
-					<p class="percent">{{progressPercent}}%</p>
-				</div>
-  </ion-row>
-  <ion-row>
-      <ion-col>Balance</ion-col>
-      <ion-col>Amount</ion-col>
-    </ion-row>
-    <ion-row>
-        <div class="progress" [attr.backgroundColor]="red">
-            <span class="percent"  [attr.width]="progressPercent">{{progressPercent}}%</span>
-            <div class="bar"></div>
-        </div>
-    </ion-row>
+    <ion-card>
+        <ion-card-header>
+            <ion-icon name="cash"></ion-icon>
+            INCOME
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row>
+                <ion-col>Income</ion-col>
+                <ion-col>Amount</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <progress-bar [progress]="50" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                    </progress-bar>          
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+                <ion-icon name="logo-usd"></ion-icon>
+                EXPENSE
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row>
+                    <ion-col>Expense</ion-col>
+                    <ion-col>Amount</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <progress-bar [progress]="50" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                    </progress-bar>          
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            <ion-icon name="pricetag"></ion-icon>
+            BALANCE
+        </ion-card-header>
+        <ion-card-content>
+            <ion-row>
+                <ion-col>Balance</ion-col>
+                <ion-col>Amount</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <progress-bar [progress]="50" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                    </progress-bar>          
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>
-<ion-footer>
-    <button ion-button full  >Reports</button>
-</ion-footer>

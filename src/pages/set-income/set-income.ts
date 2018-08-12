@@ -27,11 +27,18 @@ export class SetIncomePage {
 
   onAddIncomeCategory() {
     if(this.categories.length < this.max_categories_count)
-      this.categories.push('New Category... ');
+      this.categories.push('Category ...');
   }
 
   onNextClick() {
     this.navCtrl.push(SetExpensePage);
   }
 
+  onRemoveCategory(index:number) {
+    this.categories.splice(index,1);
+  }
+
+  customTrackBy(index: number, obj: any): any {
+    return index;
+  }
 }

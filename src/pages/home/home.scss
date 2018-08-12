@@ -1,27 +1,16 @@
 page-home {
-    .progress {
-        width: 100%;   
-        position: relative;
-        padding: 3px;
-       }
-       
-       .percent {
-        position: absolute;   
-        left: 50%;
-       }
-       
-       .bar {
-        height: 20px;
-        background-color: lightblue;
-       }
-    .loader{
-    background: #f20d49 !important;
-    border-radius:100px;
-    height:20px;
-    p{
-        text-align:center;
-        color:white !important;
-        text-align:center;
+    .progress-inner {
+        text-indent: -9999px;
+        height: 10px;
+        width: 600px;
+        white-space: nowrap;  
     }
-}
+
+    .progress-inner a {
+        outline: none;  /* prevents dotted line when link is active */
+    }
+
+    .card {
+        background-color: rgb(227, 239, 253);
+      }
 }

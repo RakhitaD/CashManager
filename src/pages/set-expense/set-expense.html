@@ -13,24 +13,35 @@
         </ion-col>
         <ion-col col-2>
             <ion-buttons end>
-              <button ion-button icon-end >
+              <button ion-button icon-end (click)="onAddExpenseCategory()">
               <ion-icon name="add" color="dark" large></ion-icon>
               </button>
             </ion-buttons>
         </ion-col>
       </ion-row>
     </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
-  <ion-list no-lines>
-    <ion-item *ngFor="let c of categories">
-        <income-category *ngIf="c" [category]='c'></income-category>
-    </ion-item>
-  </ion-list>
-  <ion-item padding>
-    <button default ion-button item-right (click)="onAddExpenseCategory()">
+  <div padding>
+    <ion-row  *ngFor="let c of categories;let i = index; trackBy: customTrackBy">
+      <ion-col col-4>
+          <ion-input color="secondary" small [(ngModel)]="categories[i]"></ion-input>
+      </ion-col>
+      <ion-col col-7>
+          <ion-input placeholder="Amount"></ion-input>
+      </ion-col>
+      <ion-col col-1>
+        <ion-buttons>
+          <button ion-button icon-start small color="danger" (click)="onRemoveCategory(i)">
+            <ion-icon name="trash" color="dark" small></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-item padding no-lines>
+    <button default ion-button item-left   (click)="onAddExpenseCategory()">
       <ion-icon name="cash"></ion-icon>
       Add Category
     </button>

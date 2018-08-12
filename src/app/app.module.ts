@@ -17,6 +17,7 @@ import { DateServiceProvider } from '../providers/date-service/date-service';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { IncomeCategoryComponent } from '../components/income-category/income-category';
 import { ProgressBarModule } from "angular-progress-bar";
+import { ReportsPage } from '../pages/reports/reports';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProgressBarModule } from "angular-progress-bar";
     SetExpensePage,
     SetIncomePage,
     BudgetCreatePage,
-    IncomeCategoryComponent
+    IncomeCategoryComponent,
+    ReportsPage
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { ProgressBarModule } from "angular-progress-bar";
     SetExpensePage,
     SetIncomePage,
     BudgetCreatePage,
-    IncomeCategoryComponent
+    IncomeCategoryComponent,
+    ReportsPage
   ],
   providers: [
     StatusBar,

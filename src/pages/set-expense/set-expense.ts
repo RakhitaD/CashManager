@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 
 /**
  * Generated class for the SetExpensePage page.
@@ -16,7 +15,7 @@ import { HomePage } from '../home/home';
 })
 export class SetExpensePage {
   categories:any[]=[];
-  max_categories_count:number = 7;
+  max_categories_count:number = 10;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.setCategories();
   }
@@ -35,5 +34,9 @@ export class SetExpensePage {
   onAddExpenseCategory() {
     if(this.categories.length < this.max_categories_count)
       this.categories.push('New Category... ');
+  }
+
+  onRemoveCategory(index:number) {
+    this.categories.splice(index,1);
   }
 }

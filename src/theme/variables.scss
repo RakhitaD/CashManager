@@ -38,9 +38,10 @@ $colors: (
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  transparent: white,
+  buttonColor:#92f3f7
 );
-
 
 // App iOS Variables
 // --------------------------------------------------
@@ -86,3 +87,4 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+$modal-inset-box-shadow-color: rgba(0, 0, 0, .4)

@@ -14,7 +14,7 @@
         <ion-col col-2>
             <ion-buttons end>
               <button ion-button icon-end (click)="onAddExpenseCategory()">
-              <ion-icon name="add" color="dark" large></ion-icon>
+              <ion-icon name="add" color="light" large></ion-icon>
               </button>
             </ion-buttons>
         </ion-col>
@@ -33,18 +33,12 @@
       </ion-col>
       <ion-col col-1>
         <ion-buttons>
-          <button ion-button icon-start small color="danger" (click)="onRemoveCategory(i)">
-            <ion-icon name="trash" color="dark" small></ion-icon>
+          <button ion-button icon-start small  clear color="transparent" (click)="onRemoveCategory(i)">
+            <ion-icon name="trash" color="danger"  large></ion-icon>
           </button>
         </ion-buttons>
       </ion-col>
     </ion-row>
   </div>
-  <ion-item padding no-lines>
-    <button default ion-button item-left   (click)="onAddExpenseCategory()">
-      <ion-icon name="cash"></ion-icon>
-      Add Category
-    </button>
-  </ion-item>
-  <button ion-button full (click)="onFinish()">Finish</button>
+  <button ion-button full round color="buttonColor" (click)="onFinish()">Finish</button>
 </ion-content>

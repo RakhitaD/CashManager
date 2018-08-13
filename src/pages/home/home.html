@@ -13,7 +13,7 @@
         <ion-col col-2>
           <ion-buttons end>
             <button ion-button icon-end  (click)="onNewBudget()">
-            <ion-icon name="add" color="dark" large></ion-icon>
+            <ion-icon name="add" color="light" large></ion-icon>
           </button>
           </ion-buttons>
         </ion-col>
@@ -22,59 +22,80 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-    <ion-card>
+<ion-content no-padding>
+    <ion-card no-padding>
         <ion-card-header>
-            <ion-icon name="cash"></ion-icon>
-            INCOME
+            <ion-icon name="cash" large color="primary" padding></ion-icon>
+            {{setHeaderText()}} Overview
+            <hr>
         </ion-card-header>
         <ion-card-content>
             <ion-row>
                 <ion-col>Income</ion-col>
-                <ion-col>Amount</ion-col>
+                <ion-col>{{totalIncome | currency:'USD':'symbol'}}</ion-col>
             </ion-row>
             <ion-row>
-                <ion-col col-12>
-                    <progress-bar [progress]="50" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                <ion-col>Expense</ion-col>
+                <ion-col>{{totalExpense | currency:'USD':'symbol'}}</ion-col>
+            </ion-row>
+            <ion-row>
+                    <ion-col>Balance</ion-col>
+                    <ion-col>{{balance | currency:'USD':'symbol'}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12 no-padding>
+                    <progress-bar [progress]="progressPercent" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
                     </progress-bar>          
                 </ion-col>
             </ion-row>
         </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-header>
-                <ion-icon name="logo-usd"></ion-icon>
-                EXPENSE
-        </ion-card-header>
-        <ion-card-content>
-            <ion-row>
-                    <ion-col>Expense</ion-col>
-                    <ion-col>Amount</ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col col-12>
-                    <progress-bar [progress]="50" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
-                    </progress-bar>          
-                </ion-col>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-header>
-            <ion-icon name="pricetag"></ion-icon>
-            BALANCE
-        </ion-card-header>
-        <ion-card-content>
-            <ion-row>
-                <ion-col>Balance</ion-col>
-                <ion-col>Amount</ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col col-12>
-                    <progress-bar [progress]="50" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
-                    </progress-bar>          
-                </ion-col>
-            </ion-row>
-        </ion-card-content>
+        <hr>
+        <ion-list class="accordion-list">
+            <ion-list-header *ngFor="let item of ionCatList; let i = index"  no-lines no-padding>
+                <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
+                    <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
+                    <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
+                        {{ item.title }}
+                </button>
+                <ion-list *ngIf="item.open" no-lines no-padding>
+                    <div *ngFor="let e of item.categories;let i = index">
+                        <ion-item  ion-item detail-none class="child-item" text-wrap no-padding>
+                                <ion-card no-padding>
+                                    <ion-card-header class="bold">
+                                        <ion-row>
+                                            <ion-col col-9>
+                                                {{e }}
+                                            </ion-col>
+                                            <ion-col col-3>
+                                                <button ion-button   small no-padding-top color="secondary" (click)="onActionClick(item.title,e)">
+                                                        <ion-icon name="add" color="dark"></ion-icon>
+                                                </button>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-card-header>
+                                    <ion-card-content>
+                                        <ion-row>
+                                            <ion-col class="smallText">Budget Spent</ion-col>
+                                            <ion-col class="smallText">Actual Budget</ion-col>
+                                            <ion-col class="smallText">Remaining</ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col class="smallerText">$2000</ion-col>
+                                            <ion-col class="smallerText">$2300</ion-col>
+                                            <ion-col class="smallerText">$300</ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col col-12 no-padding>
+                                                <progress-bar [progress]="progressPercent" [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+                                                </progress-bar>          
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-card-content>
+                                </ion-card>
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </ion-list-header>
+        </ion-list>
     </ion-card>
 </ion-content>

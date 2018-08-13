@@ -1,7 +1,7 @@
 <ion-menu [content]="content">
-  <ion-header>
+  <ion-header color="default">
     <ion-toolbar>
-      <ion-title>CASH MANAGER</ion-title>
+      <ion-title color="light">CASH MANAGER</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -18,3 +18,7 @@
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+
+<ion-footer>
+  Ads Will go here...
+</ion-footer>

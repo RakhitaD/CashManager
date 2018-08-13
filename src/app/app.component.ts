@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { BudgetCreatePage } from '../pages/budget-create/budget-create';
 import { ReportsPage } from '../pages/reports/reports';
+import { HeaderColor } from '../../node_modules/@ionic-native/header-color';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,7 +19,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,private headerColor: HeaderColor) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -36,6 +37,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.headerColor.tint('#ADD8E6');
     });
   }
 

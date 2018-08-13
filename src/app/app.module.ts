@@ -18,6 +18,10 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { IncomeCategoryComponent } from '../components/income-category/income-category';
 import { ProgressBarModule } from "angular-progress-bar";
 import { ReportsPage } from '../pages/reports/reports';
+import { HeaderColor } from '@ionic-native/header-color';
+import { CategoryServiceProvider } from '../providers/category-service/category-service';
+import { AddIncomeComponent } from '../components/add-income/add-income';
+import { AddExpenseComponent } from '../components/add-expense/add-expense';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import { ReportsPage } from '../pages/reports/reports';
     SetIncomePage,
     BudgetCreatePage,
     IncomeCategoryComponent,
-    ReportsPage
+    ReportsPage,
+    AddIncomeComponent,
+    AddExpenseComponent
   ],
   imports: [
     BrowserModule,
@@ -46,14 +52,18 @@ import { ReportsPage } from '../pages/reports/reports';
     SetIncomePage,
     BudgetCreatePage,
     IncomeCategoryComponent,
-    ReportsPage
+    ReportsPage,
+    AddIncomeComponent,
+    AddExpenseComponent
   ],
   providers: [
     StatusBar,
     SplashScreen,
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DateServiceProvider
+    DateServiceProvider,
+    HeaderColor,
+    CategoryServiceProvider
   ]
 })
 export class AppModule {}

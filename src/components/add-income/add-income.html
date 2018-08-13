@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+      <ion-row>
+        <ion-col col-10>
+          <ion-title>Expense</ion-title>
+        </ion-col>
+        <ion-col col-2>
+            <ion-buttons end>
+                <button ion-button icon-end (click)="dismiss()">
+                  <ion-icon name="close"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
+  </ion-header>
+<ion-content padding>
+  <div padding>
+    <ion-row *ngIf="category">
+      <ion-col col-4>
+          <ion-input color="secondary" small [(ngModel)]="category"></ion-input>
+      </ion-col>
+      <ion-col col-8>
+          <ion-input placeholder="Amount"></ion-input>
+      </ion-col>
+    </ion-row>
+  </div>
+  <button ion-button full round color="buttonColor" (click)="dismiss()">Finish</button>
+</ion-content>

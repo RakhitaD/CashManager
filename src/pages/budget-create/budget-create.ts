@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { DatePicker } from '../../../node_modules/@ionic-native/date-picker';
 import { SetIncomePage } from '../set-income/set-income';
 import { DateServiceProvider } from '../../providers/date-service/date-service';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the BudgetCreatePage page.
@@ -20,8 +21,10 @@ export class BudgetCreatePage {
 
   budgetStartDate:string;
   budgetEndDate:string;
+  budgetName:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private datePicker:DatePicker,private dateService:DateServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage,
+    private datePicker:DatePicker,private dateService:DateServiceProvider) {
     this.initializeBudgetDates();
   }
 
@@ -67,6 +70,11 @@ export class BudgetCreatePage {
   }
 
   onNextClick() {
+
+    // this.storage.set('budget_name',this.budgetName);
+    // this.storage.set('budget_start_date',this.budgetStartDate);
+    // this.storage.set('budget_end_date',this.budgetEndDate);
+
     this.navCtrl.push(SetIncomePage);
   }
 

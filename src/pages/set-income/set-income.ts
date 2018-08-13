@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SetExpensePage } from '../set-expense/set-expense';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the SetIncomePage page.
@@ -17,8 +18,14 @@ import { SetExpensePage } from '../set-expense/set-expense';
 export class SetIncomePage {
   categories:any[]=[];
   max_categories_count:number = 5;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  outputTest:string=''
+  constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage) {
     this.setCategories();
+
+    // this.storage.get('budget_name').then((val) => {
+    //   console.log('Your budget name is', val);
+    //   this.outputTest = 'Your budget name is'+ val;
+    // });
   }
 
   setCategories() {

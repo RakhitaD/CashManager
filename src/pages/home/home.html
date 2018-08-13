@@ -53,27 +53,41 @@
         <ion-list class="accordion-list">
             <ion-list-header *ngFor="let item of ionCatList; let i = index"  no-lines no-padding>
                 <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
-                    <ion-icon item-left name="arrow-forward" *ngIf="!item.open"></ion-icon>
-                    <ion-icon item-left name="arrow-down" *ngIf="item.open"></ion-icon>
+                    <ion-icon item-left name="arrow-dropright-circle" color="primary" *ngIf="!item.open"></ion-icon>
+                    <ion-icon item-left name="arrow-dropup-circle" color="light" *ngIf="item.open"></ion-icon>
                         {{ item.title }}
+                        <ion-icon item-right name="add" [ngClass]="item.income?light:dark" (click)="onAccordHeaderClick(item.income,i)"></ion-icon>
                 </button>
                 <ion-list *ngIf="item.open" no-lines no-padding>
                     <div *ngFor="let e of item.categories;let i = index">
                         <ion-item  ion-item detail-none class="child-item" text-wrap no-padding>
                                 <ion-card no-padding>
                                     <ion-card-header class="bold">
-                                        <ion-row>
+                                        <ion-row  *ngIf="!item.income">
                                             <ion-col col-9>
                                                 {{e }}
                                             </ion-col>
                                             <ion-col col-3>
-                                                <button ion-button   small no-padding-top color="secondary" (click)="onActionClick(item.title,e)">
+                                                <button ion-button   small no-padding-top color="secondary" (click)="onActionClick('expense',e)">
                                                         <ion-icon name="add" color="dark"></ion-icon>
                                                 </button>
                                             </ion-col>
                                         </ion-row>
+                                        <div *ngIf="item.income" (click)="onEditIncome(i)" class="pointer">
+                                            <ion-row>
+                                                <ion-col col-8>
+                                                    {{e}}
+                                                </ion-col>
+                                                <ion-col col-4>
+                                                    $4500
+                                                </ion-col>
+                                            </ion-row>
+                                            <ion-row>
+                                                <ion-col class="smallText">Income</ion-col> 
+                                            </ion-row>
+                                        </div>
                                     </ion-card-header>
-                                    <ion-card-content>
+                                    <ion-card-content  *ngIf="!item.income">
                                         <ion-row>
                                             <ion-col class="smallText">Budget Spent</ion-col>
                                             <ion-col class="smallText">Actual Budget</ion-col>

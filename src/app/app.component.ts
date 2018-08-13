@@ -4,10 +4,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { BudgetCreatePage } from '../pages/budget-create/budget-create';
 import { ReportsPage } from '../pages/reports/reports';
-import { HeaderColor } from '../../node_modules/@ionic-native/header-color';
+import { CashManagerSettingsPage } from '../pages/cash-manager-settings/cash-manager-settings';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,15 +19,32 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,private headerColor: HeaderColor) {
+  constructor(public platform: Platform, public statusBar: StatusBar, private admobFree: AdMobFree,
+    public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
+      { title: 'Settings', component: CashManagerSettingsPage },
       { title: 'Reports', component: ReportsPage },
     ];
+    
+    const bannerConfig: AdMobFreeBannerConfig = {
+      // add your config here
+      // for the sake of this example we will just use the test config
+      isTesting: true,
+      autoShow: true
+     };
+     this.admobFree.banner.config(bannerConfig);
+
+     this.admobFree.banner.prepare()
+     .then(() => {
+       this.admobFree.banner.show();
+        // banner Ad is ready
+        // if we set autoShow to false, then we will need to call the show method here
+     })
+  .catch(e => console.log(e));
 
   }
 
@@ -37,7 +54,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.headerColor.tint('#ADD8E6');
     });
   }
 
@@ -49,6 +65,10 @@ export class MyApp {
 
   onNewBudget() {
     this.nav.push(BudgetCreatePage);
+  }
+
+  onShowReport() {
+    this.nav.push(ReportsPage);
   }
   
 }

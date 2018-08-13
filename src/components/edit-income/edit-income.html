@@ -2,7 +2,7 @@
     <ion-navbar>
         <ion-row>
           <ion-col col-10>
-            <ion-title>Add Expense</ion-title>
+            <ion-title>Edit Income</ion-title>
           </ion-col>
           <ion-col col-2>
               <ion-buttons end>
@@ -18,10 +18,10 @@
     <div padding>
       <ion-row *ngIf="category">
         <ion-col col-4>
-            <ion-label color="danger" small>{{category}}</ion-label>
+            <ion-label color="secondary" small>{{category}}</ion-label>
         </ion-col>
         <ion-col col-8>
-            <ion-input id="amount" name="amount" placeholder="Amount"></ion-input>
+            <ion-input placeholder="Amount"></ion-input>
         </ion-col>
       </ion-row>
     </div>

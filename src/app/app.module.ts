@@ -22,19 +22,24 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { CategoryServiceProvider } from '../providers/category-service/category-service';
 import { AddIncomeComponent } from '../components/add-income/add-income';
 import { AddExpenseComponent } from '../components/add-expense/add-expense';
+import { EditIncomeComponent } from '../components/edit-income/edit-income';
+import { CashManagerSettingsPage } from '../pages/cash-manager-settings/cash-manager-settings';
+import { AdMobFree } from '../../node_modules/@ionic-native/admob-free';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     SetExpensePage,
     SetIncomePage,
     BudgetCreatePage,
     IncomeCategoryComponent,
     ReportsPage,
     AddIncomeComponent,
-    AddExpenseComponent
+    AddExpenseComponent,
+    EditIncomeComponent,
+    CashManagerSettingsPage
   ],
   imports: [
     BrowserModule,
@@ -42,19 +47,21 @@ import { AddExpenseComponent } from '../components/add-expense/add-expense';
     FormsModule,
     ProgressBarModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     SetExpensePage,
     SetIncomePage,
     BudgetCreatePage,
     IncomeCategoryComponent,
     ReportsPage,
     AddIncomeComponent,
-    AddExpenseComponent
+    AddExpenseComponent,
+    EditIncomeComponent,
+    CashManagerSettingsPage
   ],
   providers: [
     StatusBar,
@@ -63,7 +70,10 @@ import { AddExpenseComponent } from '../components/add-expense/add-expense';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DateServiceProvider,
     HeaderColor,
-    CategoryServiceProvider
+    AdMobFree,
+    CategoryServiceProvider,
+    Storage
+    
   ]
 })
 export class AppModule {}

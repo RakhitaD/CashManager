@@ -18,7 +18,13 @@
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
-
+<ion-fab right bottom  color="primary">
+    <button ion-fab color="primary"><ion-icon name="book"></ion-icon></button>
+    <ion-fab-list side="left" color="secondary">
+      <button ion-fab><ion-icon name="add" color="primary" (click)="onNewBudget()"></ion-icon></button>
+      <button ion-fab><ion-icon name="analytics" color="primary" (click)="onShowReport()"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>  
 <ion-footer>
-  Ads Will go here...
+  <!-- Ads Will go here... -->
 </ion-footer>

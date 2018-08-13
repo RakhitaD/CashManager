@@ -24,10 +24,10 @@
 <ion-content padding>
     <div padding>
       <ion-row  *ngFor="let c of categories;let i = index; trackBy: customTrackBy">
-        <ion-col col-4>
+        <ion-col col-7>
             <ion-input color="secondary" small [(ngModel)]="categories[i]"></ion-input>
         </ion-col>
-        <ion-col col-7>
+        <ion-col col-4>
             <ion-input placeholder="Amount"></ion-input>
         </ion-col>
         <ion-col col-1>
@@ -40,4 +40,5 @@
       </ion-row>
     </div>
   <button ion-button full round color="buttonColor" (click)="onNextClick()">Next</button>
+  <p>{{outputTest}}</p>
 </ion-content>

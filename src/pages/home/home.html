@@ -8,7 +8,7 @@
           </button>
         </ion-col>
         <ion-col col-8  style="margin-top: 1rem">
-            <ion-title>{{setHeaderText()}}</ion-title>
+            <ion-title>{{headerText}}</ion-title>
         </ion-col>
         <ion-col col-2>
           <ion-buttons end>
@@ -23,24 +23,24 @@
 </ion-header>
 
 <ion-content no-padding>
-    <ion-card no-padding>
+    <ion-card no-padding *ngIf="!showEmptyHome; else emptyHomePage">
         <ion-card-header>
             <ion-icon name="cash" large color="primary" padding></ion-icon>
-            {{setHeaderText()}} Overview
+            {{headerText}} Overview
             <hr>
         </ion-card-header>
         <ion-card-content>
             <ion-row>
                 <ion-col>Income</ion-col>
-                <ion-col>{{totalIncome | currency:'USD':'symbol'}}</ion-col>
+                <ion-col>{{totalIncome}}</ion-col>
             </ion-row>
             <ion-row>
                 <ion-col>Expense</ion-col>
-                <ion-col>{{totalExpense | currency:'USD':'symbol'}}</ion-col>
+                <ion-col>{{totalExpense}}</ion-col>
             </ion-row>
             <ion-row>
                     <ion-col>Balance</ion-col>
-                    <ion-col>{{balance | currency:'USD':'symbol'}}</ion-col>
+                    <ion-col>{{balance}}</ion-col>
             </ion-row>
             <ion-row>
                 <ion-col col-12 no-padding>
@@ -50,16 +50,16 @@
             </ion-row>
         </ion-card-content>
         <hr>
-        <ion-list class="accordion-list">
-            <ion-list-header *ngFor="let item of ionCatList; let i = index"  no-lines no-padding>
+        <ion-list class="accordion-list" >
+            <ion-list-header *ngFor="let item of ionCatList; let i = index"  no-lines no-padding >
                 <button ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
                     <ion-icon item-left name="arrow-dropright-circle" color="primary" *ngIf="!item.open"></ion-icon>
                     <ion-icon item-left name="arrow-dropup-circle" color="light" *ngIf="item.open"></ion-icon>
                         {{ item.title }}
                         <ion-icon item-right name="add" [ngClass]="item.income?light:dark" (click)="onAccordHeaderClick(item.income,i)"></ion-icon>
                 </button>
-                <ion-list *ngIf="item.open" no-lines no-padding>
-                    <div *ngFor="let e of item.categories;let i = index">
+                <ion-list *ngIf="item.open" no-lines no-padding >
+                    <ng-container *ngFor="let e of item.categories;let i = index" no-padding no-wrap>
                         <ion-item  ion-item detail-none class="child-item" text-wrap no-padding>
                                 <ion-card no-padding>
                                     <ion-card-header class="bold">
@@ -107,9 +107,28 @@
                                     </ion-card-content>
                                 </ion-card>
                         </ion-item>
-                    </div>
+                    </ng-container>
                 </ion-list>
             </ion-list-header>
         </ion-list>
     </ion-card>
+    <ng-template #emptyHomePage no-padding>
+            <ion-slides pager>
+                    <ion-slide style="background-color: white">
+                      <h2>No Budgets Yet.</h2>
+                      <ion-row>
+                        <ion-col>
+                            <p>Its easy to create one.Create one now!</p>
+                        </ion-col>
+                      </ion-row>
+                      <ion-row>
+                          <ion-col>
+                            <ion-fab middle center  color="primary" (click)="onNewBudget()">
+                                <button ion-fab color="primary"><ion-icon name="add"></ion-icon></button>
+                            </ion-fab> 
+                          </ion-col>
+                      </ion-row> 
+                    </ion-slide>
+                  </ion-slides>
+    </ng-template>
 </ion-content>

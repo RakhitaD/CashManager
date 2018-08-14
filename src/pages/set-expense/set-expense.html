@@ -29,7 +29,7 @@
           <ion-input color="secondary" small [(ngModel)]="categories[i]"></ion-input>
       </ion-col>
       <ion-col col-7>
-          <ion-input placeholder="Amount"></ion-input>
+          <ion-input placeholder="Amount" [(ngModel)]="category_Amount[i]"  (ionBlur)="setCurrency(i)"></ion-input>
       </ion-col>
       <ion-col col-1>
         <ion-buttons>

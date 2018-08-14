@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -12,7 +11,7 @@ export class CategoryServiceProvider {
 
   incomeCategories:any[];
   expenseCategories:any[];
-  constructor(public http: HttpClient) {
+  constructor() {
     this.incomeCategories = ['Salary','Bonus'];
     this.expenseCategories = ['Rent','Electricity','Bills','Transport','Financial Obligations'];
   }

@@ -8,6 +8,7 @@ import { BudgetCreatePage } from '../pages/budget-create/budget-create';
 import { ReportsPage } from '../pages/reports/reports';
 import { CashManagerSettingsPage } from '../pages/cash-manager-settings/cash-manager-settings';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free';
+import { BudgetListPage } from '../pages/budget-list/budget-list';
 
 @Component({
   templateUrl: 'app.html'
@@ -26,6 +27,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
+      { title: 'My Budgets', component: BudgetListPage },
       { title: 'Settings', component: CashManagerSettingsPage },
       { title: 'Reports', component: ReportsPage },
     ];

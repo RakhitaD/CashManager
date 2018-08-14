@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { DatePicker } from '../../../node_modules/@ionic-native/date-picker';
 import { SetIncomePage } from '../set-income/set-income';
 import { DateServiceProvider } from '../../providers/date-service/date-service';
-import { Storage } from '@ionic/storage';
+import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
+import { CommonServiceProvider } from '../../providers/common-service/common-service';
 
 /**
  * Generated class for the BudgetCreatePage page.
@@ -22,21 +22,23 @@ export class BudgetCreatePage {
   budgetStartDate:string;
   budgetEndDate:string;
   budgetName:string;
+  startDate:Date;
+  endDate:Date;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private storage:Storage,
-    private datePicker:DatePicker,private dateService:DateServiceProvider) {
+  constructor(public navCtrl: NavController,private storageService:StorageServiceProvider,
+              private dateService:DateServiceProvider,private commonService:CommonServiceProvider) {
     this.initializeBudgetDates();
+    
+    this.storageService.deleteTempBudget();
   }
 
   initializeBudgetDates() {
     let today = new Date();
-    let startDate:Date;
-    let endDate:Date;
-    startDate = new Date(today.getFullYear(),today.getMonth(),1);
-    endDate = new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(),today.getMonth(),0).getDate());
+    this.startDate = new Date(today.getFullYear(),today.getMonth(),1);
+    this.endDate = new Date(today.getFullYear(),today.getMonth(),new Date(today.getFullYear(),today.getMonth(),0).getDate());
 
-    this.budgetStartDate = this.dateService.formatDate(startDate);
-    this.budgetEndDate = this.dateService.formatDate(endDate);
+    this.budgetStartDate = this.dateService.formatDate(this.startDate);
+    this.budgetEndDate = this.dateService.formatDate(this.endDate);
   }
 
   ionViewDidLoad() {
@@ -44,38 +46,35 @@ export class BudgetCreatePage {
   }
 
   setStartDate() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
-    }).then(
-      date => {
-          this.budgetStartDate = this.dateService.formatDate(date);
-      },
-      err => console.log('Error occurred while getting date: ', err)
+    this.commonService.showDatePicker().then(
+      (result) => {
+        if(Date.parse(result))
+          this.budgetStartDate = this.dateService.formatDate(result);
+        else
+          this.budgetStartDate = this.dateService.formatDate(this.startDate);
+      }
     );
   }
 
   setEndDate() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_DEVICE_DEFAULT_LIGHT
-    }).then(
-      date => {
-          this.budgetEndDate = this.dateService.formatDate(date);
-      },
-      err => console.log('Error occurred while getting date: ', err)
+    this.commonService.showDatePicker().then(
+      (result) => {
+        if(Date.parse(result))
+          this.budgetEndDate = this.dateService.formatDate(result);
+        else
+          this.budgetEndDate = this.dateService.formatDate(this.endDate);
+      }
     );
   }
 
   onNextClick() {
-
-    // this.storage.set('budget_name',this.budgetName);
-    // this.storage.set('budget_start_date',this.budgetStartDate);
-    // this.storage.set('budget_end_date',this.budgetEndDate);
-
-    this.navCtrl.push(SetIncomePage);
+    this.storageService.saveNewBudget(this.budgetName,this.startDate,this.endDate).then(
+      () => {
+        this.commonService.presentToast('Budget set successfully.');
+        
+        this.navCtrl.push(SetIncomePage,this.budgetName);
+      }
+    );
   }
 
 }

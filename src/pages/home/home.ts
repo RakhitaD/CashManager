@@ -1,49 +1,93 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { BudgetCreatePage } from '../budget-create/budget-create';
-import { DateServiceProvider } from '../../providers/date-service/date-service';
 import { CategoryServiceProvider } from '../../providers/category-service/category-service';
 import { AddIncomeComponent } from '../../components/add-income/add-income';
 import { AddExpenseComponent } from '../../components/add-expense/add-expense';
 import { EditIncomeComponent } from '../../components/edit-income/edit-income';
+import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
+import { User } from '../../models/user';
+import { Budget } from '../../models/budget';
+import { CommonServiceProvider } from '../../providers/common-service/common-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit,OnDestroy{
   progressPercent:number;
-  totalIncome :number;
-  totalExpense:number;
-  balance:number;
+  totalIncome :string;
+  totalExpense:string;
+  balance:string;
   ionCatList:any[];
   incomeCategories:any[];
   expenseCategories:any[];
+  userData:User;
+  budget:Budget;
+  headerText:string = 'CASH MANAGER';
+  budgetId:string;
+  subscription:Subscription;
+  showEmptyHome:boolean  = false;
 
-  constructor(public navCtrl: NavController, private modCtrl:ModalController,
-    private dateService:DateServiceProvider,private categoriesService:CategoryServiceProvider) {
-    this.initializeHome();
+  constructor(public navCtrl: NavController, private modCtrl:ModalController,private storageService:StorageServiceProvider,
+    private categoriesService:CategoryServiceProvider,private commonService:CommonServiceProvider) {
+
+      this.subscription = this.storageService.budgetSourceAnnouncement.subscribe((data) => {
+        this.budgetId = data;
+
+        if(this.budgetId) {
+          this.storageService.getBudget(this.budgetId).then(
+            (data) => {
+              this.budget = data;
+              this.initializeHome(this.budget);
+            }
+          );
+        }
+      });
   }
 
-  initializeHome() {
-    this.totalIncome = 6200;
-    this.totalExpense = 5420;
-    this.balance = this.totalIncome - this.totalExpense;
-    this.progressPercent = (this.balance/ this.totalIncome)*100;
+  async ngOnInit() {
+    this.userData = await this.storageService.getUserDetails();
+    let maxbudgetId = await this.storageService.getCurrentBudgetId();
+    
+    this.budget = await this.storageService.getBudget('budget_'+maxbudgetId);
+
+
+    if(!this.budget){
+     this.showEmptyHome = true;
+      return;
+    }
+    else
+      this.showEmptyHome = false;
+
+    this.initializeHome(this.budget);
+  }
+
+  ionViewDidLoad() {
+    
+  }
+
+  async initializeHome(budget:Budget) {
+
+    let allIncome = this.storageService.getTotalIncome(this.budget);
+    let allExpense = this.storageService.getTotalExpense(this.budget);
+    let balance = allIncome - allExpense;
+    this.progressPercent = (balance/ allIncome)*100;
+
+    this.totalIncome = await this.commonService.transform_to_currency(allIncome);
+    this.totalExpense =await this.commonService.transform_to_currency(allExpense);
+    this.balance = await this.commonService.transform_to_currency(balance);
 
     this.incomeCategories = this.categoriesService.getIncomeCategories();
     this.expenseCategories = this.categoriesService.getExpenseCategories();
 
+    if(budget.budgetName){
+      this.headerText = budget.budgetName;
+      this.showEmptyHome =false;
+    }
     this.ionCatList = [{title:"Net Disposable Income",categories:this.incomeCategories,income:true},
     {title:"Total Expenditure",categories:this.expenseCategories,open:'open',income:false}];
-  }
-
-  setHeaderText() {
-    let currentDate = new Date();
-    let year = currentDate.getFullYear();
-    let month = currentDate.getMonth();
-    return this.dateService.getMonthText(month)+" "+year;
-    
   }
 
   onNewBudget() {
@@ -55,7 +99,6 @@ export class HomePage {
   }
 
   onActionClick(transaction_type:string,category:string) {
-    console.log(transaction_type,category);
     let incomeExpenseModal = null;
     if(transaction_type.toLowerCase() === 'income') {
       incomeExpenseModal =this.modCtrl.create(AddIncomeComponent, { category: category });
@@ -91,7 +134,10 @@ export class HomePage {
       incomeExpenseModal = this.modCtrl.create(AddExpenseComponent, { category: 'New Category' });
 
     incomeExpenseModal.present();
-    //this.toggleSection(toggle_index);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

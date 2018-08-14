@@ -26,5 +26,27 @@
 
 
 <ion-content padding>
-
+    <div padding>
+        <ion-row no-lines>
+          <ion-col col-12 no-padding>
+              <ion-item>
+                <ion-input type="text" [(ngModel)]="userName" placeholder="User name"></ion-input>
+              </ion-item></ion-col>
+        </ion-row>
+        <ion-row no-lines>
+            <ion-col col-12>
+                <ion-item>
+                  <ion-label >Currency</ion-label>
+                  <ion-select [(ngModel)]="currency" no-wrap no-padding>
+                    <ion-option value="MYR">Malaysian Ringgit</ion-option>
+                    <ion-option value="USD">US Dollars</ion-option>
+                    <ion-option value="CAD">Candian Dollars</ion-option>
+                    <ion-option value="INR">Indian Rupee</ion-option>
+                    <ion-option value="LKR">Sri Lankan Rupee</ion-option>
+                    <ion-option value="IRR">Iranian Ryad</ion-option>
+                  </ion-select>
+                </ion-item></ion-col>
+        </ion-row>
+      </div>
+      <button ion-button full round color="buttonColor" (click)="onSettingsSave()">Save Settings</button>
 </ion-content>

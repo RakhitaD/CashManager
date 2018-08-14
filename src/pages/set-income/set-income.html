@@ -24,11 +24,11 @@
 <ion-content padding>
     <div padding>
       <ion-row  *ngFor="let c of categories;let i = index; trackBy: customTrackBy">
-        <ion-col col-7>
-            <ion-input color="secondary" small [(ngModel)]="categories[i]"></ion-input>
+        <ion-col col-5>
+            <ion-input type="text" color="secondary" small [(ngModel)]="categories[i]"></ion-input>
         </ion-col>
-        <ion-col col-4>
-            <ion-input placeholder="Amount"></ion-input>
+        <ion-col col-6>
+            <ion-input type="text" placeholder="Amount" [(ngModel)]="category_Amount[i]" (ionBlur)="setCurrency(i)"></ion-input>
         </ion-col>
         <ion-col col-1>
           <ion-buttons>

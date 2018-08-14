@@ -23,10 +23,15 @@ export class DateServiceProvider {
     if(dd<10){
       stringDD='0'+dd as string;
     } 
+    else
+      stringDD = dd.toString();
     if(mm<10){
       stringMO='0'+mm;
     } 
-    stringYY = dd+'/'+mm+'/'+yyyy;
+    else
+      stringMO = mm.toString();
+      
+    stringYY = stringDD+'/'+stringMO+'/'+yyyy;
 
     return stringYY;
   }

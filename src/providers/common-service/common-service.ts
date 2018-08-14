@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { DatePicker } from '../../../node_modules/@ionic-native/date-picker';
-import { DateServiceProvider } from '../date-service/date-service';
 import { CurrencyPipe,DecimalPipe } from "@angular/common";
 import { User } from '../../models/user';
 import { StorageServiceProvider } from '../storage-service/storage-service';

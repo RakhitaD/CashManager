@@ -22,7 +22,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-padding>
+<ion-content no-padding >
     <ion-card no-padding *ngIf="!showEmptyHome; else emptyHomePage">
         <ion-card-header>
             <ion-icon name="cash" large color="primary" padding></ion-icon>
@@ -116,9 +116,10 @@
             <ion-slides pager>
                     <ion-slide style="background-color: white">
                       <h2>No Budgets Yet.</h2>
-                      <ion-row>
+                      <ion-row padding>
                         <ion-col>
-                            <p>Its easy to create one.Create one now!</p>
+                            <p> Beware of little expenses; a small leak will sink a great ship </p>
+                            <p  class="smallText"> -Benjamin Franklin</p>
                         </ion-col>
                       </ion-row>
                       <ion-row>

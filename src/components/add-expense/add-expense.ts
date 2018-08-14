@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams, ViewController, ActionSheetController } from "ionic-angular";
 import { Camera,CameraOptions, PictureSourceType } from '../../../node_modules/@ionic-native/camera';
-import { File } from "@ionic-native/file";
 /**
  * Generated class for the AddExpenseComponent component.
  *
@@ -17,7 +16,7 @@ export class AddExpenseComponent {
   category: string;
   imgSrc:any;
   
-  constructor(private params:NavParams,public viewCtrl:ViewController,private file:File,
+  constructor(private params:NavParams,public viewCtrl:ViewController,
     private _camera:Camera,private actionSheetCtrl:ActionSheetController) {
     this.category = this.params.get('category');
     console.log(this.category);

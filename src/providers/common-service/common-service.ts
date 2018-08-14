@@ -18,7 +18,7 @@ export class CommonServiceProvider {
   userData:User;
   constructor(public http: HttpClient,public toastCtrl:ToastController,private cp: CurrencyPipe,
     private storageService:StorageServiceProvider,
-    private dp:DecimalPipe,private datePicker:DatePicker,private dateService:DateServiceProvider) {
+    private dp:DecimalPipe,private datePicker:DatePicker) {
     console.log('Hello CommonServiceProvider Provider');
   }
 

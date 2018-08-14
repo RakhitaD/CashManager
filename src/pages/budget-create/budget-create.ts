@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { SetIncomePage } from '../set-income/set-income';
 import { DateServiceProvider } from '../../providers/date-service/date-service';
 import { StorageServiceProvider } from '../../providers/storage-service/storage-service';

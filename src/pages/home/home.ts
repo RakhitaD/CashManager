@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { BudgetCreatePage } from '../budget-create/budget-create';
 import { CategoryServiceProvider } from '../../providers/category-service/category-service';

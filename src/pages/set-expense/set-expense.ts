@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import { StorageServiceProvider } from '../../providers/storage-service/storage-service';
 import { CommonServiceProvider } from '../../providers/common-service/common-service';
-import { HomePage } from '../home/home';
 
 /**
  * Generated class for the SetExpensePage page.
